@@ -46,9 +46,11 @@ import lombok.Data;
             return ResponseEntity.ok("items added successfully");
         } 
 
-        @GetMapping("/items/all")
-        public @ResponseBody List<UserEntity> getAllUserEntities(){
-             return userRepo.findAll();
+        @GetMapping("/items/all/{id}")
+        public @ResponseBody List<UserEntity> getAllUserEntities(@PathVariable Long id){
+            String username=SecurityContextHolder.getContext().getAuthentication().getName();
+            LoginEntity login=loginRepo.findByUsername(username).orElseThrow(()-> new RuntimeException("User not found"));
+             return userRepo.findByOwner(login);
         }
 
         @DeleteMapping("/items/{id}")
