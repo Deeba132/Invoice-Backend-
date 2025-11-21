@@ -39,7 +39,7 @@ public class JWTFilter extends OncePerRequestFilter {
         logger.debug("Processing request: {}", path);
         
         // Skip JWT check for /api/auth/**
-        if (path.startsWith("/api/auth")) {
+        if (path.startsWith("/api/auth")||"OPTIONS".equalsIgnoreCase(request.getMethod())) {
             logger.debug("Skipping JWT filter for auth endpoint");
             filterChain.doFilter(request, response);
             return;
