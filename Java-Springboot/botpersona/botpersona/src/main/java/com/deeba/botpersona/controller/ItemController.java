@@ -47,7 +47,7 @@ import lombok.Data;
         } 
 
         @GetMapping("/items/all")
-        public @ResponseBody List<UserEntity> getAllUserEntities(@PathVariable Long id){
+        public @ResponseBody List<UserEntity> getAllUserEntities(){
             String username=SecurityContextHolder.getContext().getAuthentication().getName();
             LoginEntity login=loginRepo.findByUsername(username).orElseThrow(()-> new RuntimeException("User not found"));
              return userRepo.findByOwnerId(login.getId());
