@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.deeba.botpersona.model.UserEntity;
 public interface UserRepo extends JpaRepository<UserEntity, Long> {
-    List<UserEntity> findByOwner(Long id);
+    List<UserEntity> findByOwnerId(Long Id);
 }
 

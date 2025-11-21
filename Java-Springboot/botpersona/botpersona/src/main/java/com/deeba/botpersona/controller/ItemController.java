@@ -50,7 +50,7 @@ import lombok.Data;
         public @ResponseBody List<UserEntity> getAllUserEntities(@PathVariable Long id){
             String username=SecurityContextHolder.getContext().getAuthentication().getName();
             LoginEntity login=loginRepo.findByUsername(username).orElseThrow(()-> new RuntimeException("User not found"));
-             return userRepo.findByOwner(login.getId());
+             return userRepo.findByOwnerId(login.getId());
         }
 
         @DeleteMapping("/items/{id}")
