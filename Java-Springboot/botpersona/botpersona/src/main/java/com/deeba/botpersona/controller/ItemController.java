@@ -39,8 +39,10 @@ import lombok.Data;
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
             LoginEntity login=loginRepo.findByUsername(username).orElseThrow(()-> new RuntimeException("User not found"));
             userEntity.setName(itemsRequest.getName());
-            userEntity.setPrice(itemsRequest.getPrice());
-            userEntity.setQuantity(itemsRequest.getQuantity());
+            Double unitPrice=itemsRequest.getPrice();
+            int quantity=itemsRequest.getQuantity();
+            userEntity.setPrice(unitPrice*quantity);
+            userEntity.setQuantity(quantity);
             userEntity.setOwner(login);
             userRepo.save(userEntity);
             return ResponseEntity.ok("items added successfully");
@@ -77,10 +79,12 @@ import lombok.Data;
                 userRecord.setName(itemsRequest.getName());
             }
             if(itemsRequest.getPrice()!=null){
-                userRecord.setPrice(itemsRequest.getPrice());
+                Double totalprice=itemsRequest.getPrice()*itemsRequest.getQuantity();
+                userRecord.setPrice(totalprice);
             }
             if(itemsRequest.getQuantity()!=null){
                 userRecord.setQuantity(itemsRequest.getQuantity());
+                userRecord.setPrice(itemsRequest.getPrice()*itemsRequest.getQuantity());
             }
             userRepo.save(userRecord);
             return ResponseEntity.ok("Updated successfully");
