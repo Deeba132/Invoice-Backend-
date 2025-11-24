@@ -78,14 +78,10 @@ import lombok.Data;
             if(itemsRequest.getName()!=null&& !itemsRequest.getName().isEmpty() ){
                 userRecord.setName(itemsRequest.getName());
             }
-            if(itemsRequest.getPrice()!=null){
-                Double totalprice=itemsRequest.getPrice()*itemsRequest.getQuantity();
-                userRecord.setPrice(totalprice);
-            }
-            if(itemsRequest.getQuantity()!=null){
-                userRecord.setQuantity(itemsRequest.getQuantity());
-                userRecord.setPrice(itemsRequest.getPrice()*itemsRequest.getQuantity());
-            }
+            Double price=itemsRequest.getPrice()!=null?itemsRequest.getPrice():userRecord.getPrice()/userRecord.getQuantity();
+            Integer quantity=itemsRequest.getQuantity()!=null?itemsRequest.getQuantity():userRecord.getQuantity();
+            userRecord.setPrice(price);
+            userRecord.setQuantity(quantity);
             userRepo.save(userRecord);
             return ResponseEntity.ok("Updated successfully");
         }
