@@ -83,10 +83,10 @@ import lombok.Data;
             }
             Double price=itemsRequest.getPrice()!=null?itemsRequest.getPrice():userRecord.getPrice()/userRecord.getQuantity();
             Integer quantity=itemsRequest.getQuantity()!=null?itemsRequest.getQuantity():userRecord.getQuantity();
-            userRecord.setPrice(price);
+            userRecord.setPrice(price*quantity);
             userRecord.setQuantity(quantity);
             userRepo.save(userRecord);
-            return ResponseEntity.ok("Updated successfully");
+            return ResponseEntity.ok(Map.of("message","Updated successfully"));
         }
     }
 
