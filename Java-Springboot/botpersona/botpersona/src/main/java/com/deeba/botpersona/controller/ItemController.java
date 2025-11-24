@@ -1,6 +1,8 @@
 package com.deeba.botpersona.controller;
 
 import java.util.List;
+import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,7 @@ import com.deeba.botpersona.model.LoginEntity;
 import com.deeba.botpersona.model.UserEntity;
 import com.deeba.botpersona.repository.LoginRepo;
 import com.deeba.botpersona.repository.UserRepo;
+
 
 import lombok.Data;
 
@@ -45,7 +48,7 @@ import lombok.Data;
             userEntity.setQuantity(quantity);
             userEntity.setOwner(login);
             userRepo.save(userEntity);
-            return ResponseEntity.ok("items added successfully");
+            return ResponseEntity.ok(Map.of("message","items added successfully"));
         } 
 
         @GetMapping("/items/all")
