@@ -6,7 +6,10 @@ import com.deeba.botpersona.repository.LoginRepo;
 
 import com.deeba.botpersona.security.JWTUtil;
     import lombok.Data;
-    import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.http.ResponseEntity;
     import org.springframework.security.authentication.AuthenticationManager;
     import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,7 +38,7 @@ import org.springframework.web.bind.annotation.*;
         @PostMapping("/register")
         public ResponseEntity<?> register(@RequestBody RegisterRequest request){
             if (loginRepo.findByUsername(request.getUsername()).isPresent()) {
-            return ResponseEntity.badRequest().body("Username already exists");
+            return ResponseEntity.badRequest().body(Map.of("message","Username already exists"));
         }
 
         LoginEntity user = new LoginEntity();
@@ -61,7 +64,7 @@ import org.springframework.web.bind.annotation.*;
                 String token = jwtUtil.generateToken(username);
                 return ResponseEntity.ok(new LoginResponse(token, "Login successful"));
             } catch (AuthenticationException e) {
-                return ResponseEntity.status(401).body("Invalid username or password");
+                return ResponseEntity.status(401).body(Map.of("message","Invalid username or password"));
             }
         }
 

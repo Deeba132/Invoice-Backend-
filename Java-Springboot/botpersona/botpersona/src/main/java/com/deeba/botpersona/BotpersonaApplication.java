@@ -26,7 +26,7 @@ public class BotpersonaApplication {
 			@Override
 		public void addCorsMappings(CorsRegistry registry){
 			registry.addMapping("/**")
-			.allowedOrigins("http://localhost:5173")
+			.allowedOrigins("https://invoice-frontend-mu-ten.vercel.app/")
 			.allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "PATCH","OPTIONS")
 			.allowedHeaders("Content-Type","Authorization")
 			.allowCredentials(true);
