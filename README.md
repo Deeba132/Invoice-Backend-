@@ -1,13 +1,10 @@
 ---
-
 # 📄 README.md (Backend Repo)
 
-```markdown
 # Invoice Management Backend
 
-Spring Boot REST API for managing items, customer details, and generating invoices.  
+Spring Boot REST API for managing items, customer details, and generating invoices.
 Deployed on **Railway**, connected to PostgreSQL database.
-
 ---
 
 ## 🚀 Features
@@ -53,6 +50,7 @@ DELETE /items/{id} → Delete item
 
 GET /invoice/{id} → Generate invoice
 
+```
+
 Live Demo
 Backend (Railway): (https://invoice-backend-production-bcd0.up.railway.app/)
-```
