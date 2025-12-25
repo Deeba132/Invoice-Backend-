@@ -34,6 +34,19 @@ cd backend
 mvn clean package
 java -jar target/app.jar
 
+Using Docker:
+in bash:
+docker build -t botpersona:latest .
+
+then:
+docker run -p 8080:8080 \
+  -e SPRING_DATASOURCE_URL=jdbc:postgresql://<railway-host>:<port>/<dbname>?sslmode=require \
+  -e SPRING_DATASOURCE_USERNAME=<username> \
+  -e SPRING_DATASOURCE_PASSWORD=<password> \
+  botpersona:latest
+
+
+
 📡 API Endpoints:
 
 POST /auth/register → Register new user
@@ -52,5 +65,4 @@ GET /invoice/{id} → Generate invoice
 
 ```
 
-Live Demo
-Backend (Railway): (https://invoice-backend-production-bcd0.up.railway.app/)
+Live Demo On Vercel: (https://invoice-frontend-mu-ten.vercel.app/)
